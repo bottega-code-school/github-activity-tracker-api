@@ -1,5 +1,6 @@
 class AccountsController < ApplicationController
   include AuthenticationConcern
+  include Github
 
   def index
     if @current_user
