@@ -32,4 +32,4 @@ end
 gem 'bcrypt', '~> 3.1', '>= 3.1.12'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'active_model_serializers', '~> 0.10.7'
-gem 'http', '~> 4.0', '>= 4.0.5'
+gem 'httparty', '~> 0.16.4'

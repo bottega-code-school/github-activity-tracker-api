@@ -14,17 +14,24 @@ class AccountsController < ApplicationController
   end
 
   def create
-    if @current_user
-      account = Account.new(account_params)
-      account.user_id = @current_user.id
+    github_query = Github.username_search(params[:account][:username])
+    github_account = JSON.parse(github_query.body)
 
-      if account.save
-        render json: account, status: :created
+    if github_account["login"]
+      if @current_user
+        account = Account.new(account_params)
+        account.user_id = @current_user.id
+
+        if account.save
+          render json: account, status: :created
+        else
+          render json: account.errors, status: :unprocessable_entity
+        end
       else
-        render json: account.errors, status: :unprocessable_entity
+        render json: { status: 401 }
       end
     else
-      render json: { status: 401 }
+      render json: account.errors, status: :unprocessable_entity
     end
   end
 
