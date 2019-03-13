@@ -1,6 +1,12 @@
 class AccountsController < ApplicationController
+  include AuthenticationConcern
+
   def index
-    # TODO
+    if @current_user
+      render json: @current_user.accounts
+    else
+      render json: { status: 401 }
+    end
   end
 
   def show
