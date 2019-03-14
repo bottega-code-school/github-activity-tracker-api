@@ -20,6 +20,10 @@ class AccountsController < ApplicationController
 
     if github_account["login"]
       if @current_user
+        if @current_user.accounts.pluck(:username) == params[:account][:username])
+          render json: { error: "USERNAME_ALREADY_SELECTED" }
+        end
+
         account = Account.new(account_params)
         account.user_id = @current_user.id
 
