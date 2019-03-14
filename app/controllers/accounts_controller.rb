@@ -20,7 +20,7 @@ class AccountsController < ApplicationController
 
     if github_account["login"]
       if @current_user
-        if @current_user.accounts.pluck(:username) == github_account["login"]
+        if @current_user.accounts.pluck(:username).include? github_account["login"]
           render json: { error: "USERNAME_ALREADY_SELECTED" }
         end
 
