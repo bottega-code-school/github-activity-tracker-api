@@ -8,8 +8,7 @@ class Account < ApplicationRecord
   private
 
     def unique_username_for_user
-      puts "unique_username_for_user" * 500, self.username, "unique_username_for_user" * 500
-      puts "collection" * 500, self.user.accounts.pluck(:username), "collection" * 500
+      puts "asdf" * 500, self.user.accounts.pluck(:username).include? self.username, "ASDF" * 500
       if self.user.accounts.pluck(:username).include? self.username
         false
       else
