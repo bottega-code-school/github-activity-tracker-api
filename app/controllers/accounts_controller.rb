@@ -22,6 +22,7 @@ class AccountsController < ApplicationController
       if @current_user
         if @current_user.accounts.pluck(:username).include? github_account["login"]
           render json: { error: "USERNAME_ALREADY_SELECTED" }
+          return
         end
 
         account = Account.new(account_params)
