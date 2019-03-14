@@ -12,4 +12,8 @@ class Account < ApplicationRecord
         errors.add(:username, "username was already added")
       end
     end
+
+    def login
+      self.username
+    end
 end
