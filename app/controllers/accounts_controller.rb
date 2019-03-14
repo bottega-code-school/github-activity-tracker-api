@@ -24,7 +24,7 @@ class AccountsController < ApplicationController
         account.user_id = @current_user.id
 
         if account.save
-          render json: account, status: :created
+          render json: github_account, status: :created
         else
           render json: account.errors, status: :unprocessable_entity
         end
