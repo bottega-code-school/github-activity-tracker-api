@@ -18,15 +18,8 @@ class AccountsController < ApplicationController
     github_query = Github.username_search(params[:account][:username])
     github_account = JSON.parse(github_query.body)
 
-    if @current_user && github_account["login"]
-      if @current_user.accounts.pluck(:username).include? github_account["login"]
-        render json: { error: "USERNAME_ALREADY_SELECTED" }
-      end
-    end
-
     if github_account["login"]
       if @current_user
-
         account = Account.new(account_params)
         account.user_id = @current_user.id
 
