@@ -1,6 +1,6 @@
 class AccountSerializer < ActiveModel::Serializer
   attributes :id,
-             :login
+             :login,
              :user_id,
              :avatar_url,
              :bio,
