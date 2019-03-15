@@ -52,6 +52,9 @@ class AccountsController < ApplicationController
     def account_params
       params.require(:account).permit(
         :login,
+        :city,
+        :state,
+        :postal
       )
     end
 end

@@ -1,7 +1,7 @@
 class Account < ApplicationRecord
   belongs_to :user
 
-  validates_presence_of :login
+  validates_presence_of :login, :city, :state, :postal
 
   validate :unique_login_for_user
 

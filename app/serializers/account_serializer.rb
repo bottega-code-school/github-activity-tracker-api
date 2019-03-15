@@ -8,7 +8,10 @@ class AccountSerializer < ActiveModel::Serializer
              :public_gists,
              :followers,
              :following,
-             :member_since
+             :member_since,
+             :city,
+             :state,
+             :postal
 
   belongs_to :user
 end
