@@ -15,7 +15,7 @@ class AccountsController < ApplicationController
   end
 
   def create
-    github_query = Github.username_search(params[:account][:username])
+    github_query = Github.username_search(params[:account][:login])
     github_account = JSON.parse(github_query.body)
 
     if github_account["login"]
@@ -43,6 +43,6 @@ class AccountsController < ApplicationController
   private
 
     def account_params
-      params.require(:account).permit(:username)
+      params.require(:account).permit(:login)
     end
 end
