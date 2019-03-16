@@ -12,6 +12,7 @@ class Account < ApplicationRecord
 
     def build_events
       event_query = Github.fetch_events(self.login)
+      puts "DATA" * 500, event_query.body, "data" * 500
       JSON.parse(event_query.body).each do |event|
         Event.create!(
           account: self,
