@@ -12,16 +12,17 @@ class Account < ApplicationRecord
 
     def build_events
       event_query = Github.fetch_events(self.login)
-      puts "DATA" * 500, event_query.body, "data" * 500
       JSON.parse(event_query.body).each do |event|
-        Event.create!(
-          account: self,
-          repo_name: event["repo"]["name"],
-          repo_url:  event["repo"]["url"],
-          date: event["created_at"].to_date,
-          message: event["payload"]["commits"][0]["message"],
-          commit_count: event["payload"]["size"]
-        )
+        if event["type"] == "PushEvent"
+          Event.create!(
+            account: self,
+            repo_name: event["repo"]["name"],
+            repo_url:  event["repo"]["url"],
+            date: event["created_at"].to_date,
+            message: event["payload"]["commits"][0]["message"],
+            commit_count: event["payload"]["size"]
+          )
+        end
       end
     end
 
