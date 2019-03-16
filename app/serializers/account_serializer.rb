@@ -14,4 +14,5 @@ class AccountSerializer < ActiveModel::Serializer
              :postal
 
   belongs_to :user
+  has_many :events
 end

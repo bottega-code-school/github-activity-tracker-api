@@ -5,6 +5,8 @@ class Account < ApplicationRecord
 
   validate :unique_login_for_user
 
+  has_many :events, dependent: :destroy
+
   private
 
     def unique_login_for_user
