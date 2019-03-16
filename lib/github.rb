@@ -6,4 +6,8 @@ module Github
   def self.username_search username
     HTTParty.get("https://api.github.com/users/#{username}?#{self.api_credentials}")
   end
+
+  def self.fetch_events username
+    HTTParty.get("https://api.github.com/users/#{username}/events?per_page=100")
+  end
 end
