@@ -1,13 +1,19 @@
 class Account < ApplicationRecord
-  belongs_to :user
-
+  include Github
   validates_presence_of :login, :city, :state, :postal
-
   validate :unique_login_for_user
 
+  belongs_to :user
   has_many :events, dependent: :destroy
 
+  after_create :build_events
+
   private
+
+    def build_events
+      # TODO
+      event_query = Github.fetch_events(self.login)
+    end
 
     def unique_login_for_user
       if self.user.accounts.pluck(:login).include?(self.login)
