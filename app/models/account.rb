@@ -19,8 +19,8 @@ class Account < ApplicationRecord
           repo_name: event["repo"]["name"],
           repo_url:  event["repo"]["url"],
           date: event["created_at"].to_date,
-          message: event["commits"][0]["message"],
-          commit_count: event["size"]
+          message: event["payload"]["commits"][0]["message"],
+          commit_count: event["payload"]["size"]
         )
       end
     end
