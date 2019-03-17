@@ -16,6 +16,7 @@ class Account < ApplicationRecord
         if event["type"] == "PushEvent"
           Event.create!(
             account: self,
+            github_event_id: event["id"],
             repo_name: event["repo"]["name"],
             repo_url:  event["repo"]["url"],
             date: event["created_at"].to_date,
