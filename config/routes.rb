@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :accounts, only: [:index, :show, :create, :destroy]
+  resources :locations, only: [:index]
 
   resources :password_resets, only: [:create, :update, :show]
   resources :registrations, only: [:create]
