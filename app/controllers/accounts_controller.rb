@@ -29,6 +29,7 @@ class AccountsController < ApplicationController
         account.followers    = github_account["followers"]
         account.following    = github_account["following"]
         account.member_since = github_account["created_at"]
+        account.state        = params[:account][:state].upcase
 
         if account.save
           render json: account, status: :created
