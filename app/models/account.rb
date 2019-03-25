@@ -8,10 +8,6 @@ class Account < ApplicationRecord
 
   after_create :build_events
 
-  def self.by_state
-    group_by(&:state)
-  end
-
   private
 
     def build_events

@@ -3,7 +3,11 @@ class LocationsController < ApplicationController
 
   def index
     if @current_user
-      render json: @current_user.accounts.by_state
+      if @current_user.accounts.any?
+        render json: @current_user.accounts.group_by(&:state)
+      else
+        render json: @current_user.accounts
+      end
     else
       render json: { status: 401 }
     end
