@@ -2,6 +2,7 @@ class Account < ApplicationRecord
   include Github
   validates_presence_of :login, :state
   validate :unique_login_for_user
+  validate :state_abbr_exists
 
   belongs_to :user
   has_many :events, dependent: :destroy
@@ -30,6 +31,13 @@ class Account < ApplicationRecord
     def unique_login_for_user
       if self.user.accounts.pluck(:login).include?(self.login)
         errors.add(:login, "username was already added")
+      end
+    end
+
+    def state_abbr_exists
+      state_abbr_list = %w{AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY}
+      if state_abbr_list.include?(self.state)
+        errors.add(:state, "State does not exist")
       end
     end
 end
