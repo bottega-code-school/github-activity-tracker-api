@@ -9,9 +9,7 @@ class AccountSerializer < ActiveModel::Serializer
              :followers,
              :following,
              :member_since,
-             :city,
-             :state,
-             :postal
+             :state
 
   belongs_to :user
   has_many :events

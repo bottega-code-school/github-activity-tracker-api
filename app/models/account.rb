@@ -1,6 +1,6 @@
 class Account < ApplicationRecord
   include Github
-  validates_presence_of :login, :city, :state, :postal
+  validates_presence_of :login, :state
   validate :unique_login_for_user
 
   belongs_to :user
