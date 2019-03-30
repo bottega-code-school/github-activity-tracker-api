@@ -15,7 +15,7 @@ class GroupedEventsController < ApplicationController
               nested_hash = Hash.new
               nested_hash["bin"] = account[0]
               nested_hash["login"] = account[1]
-              nested_hash["count"] = Event.where(account_id: account[0], date: date).length
+              nested_hash["count"] = Event.where(account_id: account[0], date: date).length * 15
               nested_arr << nested_hash
             end
 
