@@ -8,7 +8,7 @@ class GroupedEventsController < ApplicationController
 
         if Event.where(id: accounts[0]).any?
           events = Event.where(account_id: accounts[0]).group_by(&:account_id)
-          date_range.each_with_object([]).with_index do |(date, arr), idx|
+          populated_events = date_range.each_with_object([]).with_index do |(date, arr), idx|
             hash = Hash.new
             hash["bin"] = idx
 
@@ -21,6 +21,8 @@ class GroupedEventsController < ApplicationController
 
             arr << hash
           end
+
+          render json: { events: populated_events }
         else
           render json: { events: [] }
         end
