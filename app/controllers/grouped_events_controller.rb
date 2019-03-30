@@ -6,7 +6,7 @@ class GroupedEventsController < ApplicationController
       if @current_user.accounts.any?
         accounts = @current_user.accounts.pluck(:id, :login)
 
-        if Event.where(id: account_ids).any?
+        if Event.where(id: accounts).any?
           events = Event.where(account_id: account_ids).group_by(&:account_id)
           date_range.each_with_object([]).with_index do |(date, arr), idx|
             hash = Hash.new
