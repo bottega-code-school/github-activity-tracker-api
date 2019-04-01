@@ -4,7 +4,7 @@ class GroupedEventsController < ApplicationController
   def index
     if @current_user
       if @current_user.accounts.any?
-        accounts = @current_user.accounts.pluck(:id, :login)
+        accounts = @current_user.accounts.pluck(:id, :login, :avatar_url)
 
         if Event.where(id: accounts[0]).any?
           populated_events = date_range.each_with_object([]).with_index do |(date, arr), idx|
@@ -16,6 +16,7 @@ class GroupedEventsController < ApplicationController
               nested_hash["bin"] = account[0]
               nested_hash["login"] = account[1]
               nested_hash["count"] = Event.where(account_id: account[0], date: date).length
+              nested_hash["avatar_url"] = account[2]
               nested_arr << nested_hash
             end
 
