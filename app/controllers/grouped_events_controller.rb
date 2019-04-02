@@ -17,6 +17,7 @@ class GroupedEventsController < ApplicationController
               nested_hash["login"] = account[1]
               nested_hash["count"] = Event.where(account_id: account[0], date: date).length
               nested_hash["avatar_url"] = account[2]
+              nested_hash["date"] = date
               nested_arr << nested_hash
             end
 
