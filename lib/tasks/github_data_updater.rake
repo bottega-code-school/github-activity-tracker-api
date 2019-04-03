@@ -3,7 +3,7 @@ namespace :github_data_updater do
   task run: :environment do
     include Github
 
-    Account.where(login: 'jordanhudgens').each do |account|
+    Account.all.each do |account|
       event_ids = account.events.pluck(:id)
       event_query = Github.fetch_events(account.login)
 
