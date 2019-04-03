@@ -19,6 +19,7 @@ namespace :github_data_updater do
             commit_count: event["payload"]["size"],
             username: account.login
           )
+        end
       end
     end
   end
