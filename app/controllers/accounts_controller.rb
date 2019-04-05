@@ -45,7 +45,13 @@ class AccountsController < ApplicationController
   end
 
   def destroy
-    # TODO
+    account = Account.find(params[:id])
+    if @current_user && account.user == @current_user
+      account.destroy
+      render json: { message: "DELETED" }
+    else
+      render json: { status: 401 }
+    end
   end
 
   private
