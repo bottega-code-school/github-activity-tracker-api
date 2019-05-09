@@ -11,7 +11,6 @@ class AccountsController < ApplicationController
   end
 
   def show
-    # TODO
   end
 
   def create
@@ -54,12 +53,23 @@ class AccountsController < ApplicationController
     end
   end
 
+  def update
+    account = Account.find(params[:id])
+
+    if account.update(account_params)
+      render json: account
+    else
+      render json: { status: 422 }
+    end
+  end
+
   private
 
     def account_params
       params.require(:account).permit(
         :login,
-        :state
+        :state,
+        :days_to_hire
       )
     end
 end

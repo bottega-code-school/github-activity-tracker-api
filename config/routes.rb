@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :accounts, only: [:index, :show, :create, :destroy]
+  resources :accounts, only: [:index, :show, :create, :destroy, :update]
   resources :locations, only: [:index]
   resources :grouped_events, only: [:index]
 
