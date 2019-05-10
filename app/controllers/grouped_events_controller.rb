@@ -36,6 +36,37 @@ class GroupedEventsController < ApplicationController
     end
   end
 
+  def hire_rate_average(account_ids, hire_rate_num)
+    accounts = Account.where(id: account_ids, days_to_hire: hire_rate_num)
+    if accounts.any?
+      events = accounts.map { |account| account.events.count }
+      events.inject(&:+) / accounts.length
+    else
+      0
+    end
+  end
+
+  def hire_rates
+    if @current_user
+      if @current_user.accounts.any?
+        accounts = @current_user.accounts.pluck(:id, :days_to_hire)
+
+        hire_rate_data = (1..100).to_a.map do |hire_rate_num|
+          {
+            date: hire_rate_num,
+            value: hire_rate_average(accounts[0], hire_rate_num)
+          }
+        end
+
+        render json: { hire_rate_data: hire_rate_data }
+      else
+        render json: { hire_rate_data: [] }
+      end
+    else
+      render json: { status: 401 }
+    end
+  end
+
   private
 
     def date_range(a_range = 2.months.ago..0.days.ago)
