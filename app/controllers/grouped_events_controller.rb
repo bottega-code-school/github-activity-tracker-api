@@ -40,7 +40,7 @@ class GroupedEventsController < ApplicationController
     accounts = Account.where(id: account_ids, days_to_hire: hire_rate_num)
     if accounts.any?
       events = accounts.map { |account| account.events.count }
-      events.inject(&:+) / accounts.length
+      events.inject(&:+) / events.length
     else
       0
     end
