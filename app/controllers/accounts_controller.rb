@@ -56,7 +56,7 @@ class AccountsController < ApplicationController
   def update
     account = Account.find(params[:id])
 
-    if account.update(account_params)
+    if account.update!(account_params)
       render json: account
     else
       render json: { status: 422 }
