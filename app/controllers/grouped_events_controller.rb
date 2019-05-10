@@ -38,6 +38,8 @@ class GroupedEventsController < ApplicationController
 
   def hire_rate_average(account_ids, hire_rate_num)
     accounts = Account.where(id: account_ids, days_to_hire: hire_rate_num)
+    puts "account_ids", account_ids
+
     if accounts.any?
       puts "ACCOUNT IDS", accounts.inspect
       puts "EVENTS", events.inspect
