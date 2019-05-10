@@ -39,6 +39,7 @@ class GroupedEventsController < ApplicationController
   def hire_rate_average(account_ids, hire_rate_num)
     accounts = Account.where(id: account_ids, days_to_hire: hire_rate_num)
     puts "account_ids" * 500, account_ids
+    puts "day" * 500, hire_rate_num
 
     if accounts.any?
       events = accounts.map { |account| account.events.count }
