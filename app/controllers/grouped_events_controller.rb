@@ -41,9 +41,9 @@ class GroupedEventsController < ApplicationController
     puts "account_ids" * 500, account_ids
 
     if accounts.any?
+      events = accounts.map { |account| account.events.count }
       puts "ACCOUNT IDS" * 500, accounts.inspect
       puts "EVENTS" * 500, events.inspect
-      events = accounts.map { |account| account.events.count }
       events.inject(&:+) / events.length
     else
       0
