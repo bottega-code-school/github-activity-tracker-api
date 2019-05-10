@@ -50,7 +50,7 @@ class GroupedEventsController < ApplicationController
   def hire_rates
     if @current_user
       if @current_user.accounts.any?
-        accounts_ids = @current_user.accounts.pluck(:id)
+        account_ids = @current_user.accounts.pluck(:id)
         puts "account_ids" * 500, account_ids, "account_ids" * 500
         puts "current_user" * 500, @current_user.email, "current_user" * 500
 
