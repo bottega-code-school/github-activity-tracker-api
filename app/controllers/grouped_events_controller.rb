@@ -51,8 +51,6 @@ class GroupedEventsController < ApplicationController
     if @current_user
       if @current_user.accounts.any?
         account_ids = @current_user.accounts.pluck(:id)
-        puts "account_ids" * 500, account_ids, "account_ids" * 500
-        puts "current_user" * 500, @current_user.email, "current_user" * 500
 
         hire_rate_data = (1..100).to_a.map do |hire_rate_num|
           {
