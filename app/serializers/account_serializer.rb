@@ -9,7 +9,8 @@ class AccountSerializer < ActiveModel::Serializer
              :followers,
              :following,
              :member_since,
-             :state
+             :state,
+             :days_to_hire
 
   belongs_to :user
   has_many :events
