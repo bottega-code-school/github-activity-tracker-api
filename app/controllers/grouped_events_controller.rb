@@ -39,6 +39,8 @@ class GroupedEventsController < ApplicationController
   def hire_rate_average(account_ids, hire_rate_num)
     accounts = Account.where(id: account_ids, days_to_hire: hire_rate_num)
     if accounts.any?
+      puts "ACCOUNT IDS", accounts.inspect
+      puts "EVENTS", events.inspect
       events = accounts.map { |account| account.events.count }
       events.inject(&:+) / events.length
     else
