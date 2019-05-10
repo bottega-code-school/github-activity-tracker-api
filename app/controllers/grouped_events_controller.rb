@@ -38,13 +38,9 @@ class GroupedEventsController < ApplicationController
 
   def hire_rate_average(account_ids, hire_rate_num)
     accounts = Account.where(id: account_ids, days_to_hire: hire_rate_num)
-    puts "account_ids" * 500, account_ids
-    puts "day" * 500, hire_rate_num
 
     if accounts.any?
       events = accounts.map { |account| account.events.count }
-      puts "ACCOUNT IDS" * 500, accounts.inspect
-      puts "EVENTS" * 500, events.inspect
       events.inject(&:+) / events.length
     else
       0
@@ -54,12 +50,14 @@ class GroupedEventsController < ApplicationController
   def hire_rates
     if @current_user
       if @current_user.accounts.any?
-        accounts = @current_user.accounts.pluck(:id, :days_to_hire)
+        accounts_ids = @current_user.accounts.pluck(:id)
+        puts "account_ids" * 500, account_ids, "account_ids" * 500
+        puts "current_user" * 500, @current_user.email, "current_user" * 500
 
         hire_rate_data = (1..100).to_a.map do |hire_rate_num|
           {
             date: hire_rate_num,
-            value: hire_rate_average(accounts[0], hire_rate_num)
+            value: hire_rate_average(account_ids, hire_rate_num)
           }
         end
 
