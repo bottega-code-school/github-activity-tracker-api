@@ -1,7 +1,6 @@
 class Account < ApplicationRecord
   include Github
   validates_presence_of :login, :state
-  validate :unique_login_for_user
   validate :state_abbr_exists
 
   belongs_to :user
@@ -26,12 +25,6 @@ class Account < ApplicationRecord
             username: self.login
           )
         end
-      end
-    end
-
-    def unique_login_for_user
-      if self.user.accounts.pluck(:login).include?(self.login)
-        errors.add(:login, "username was already added")
       end
     end
 
